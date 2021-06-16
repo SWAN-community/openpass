@@ -8,15 +8,16 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace OpenPass.IdController
 {
     internal class Startup
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;
@@ -62,8 +63,10 @@ namespace OpenPass.IdController
 
             services.AddIdentifierHelper();
 
-            // Configure MVC
-            services.AddMvc().AddMetrics();
+            // Configure MVC, controllers and metrics.
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddControllers();
+            services.AddMetrics();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(x =>
@@ -98,11 +101,12 @@ namespace OpenPass.IdController
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            // Enable routing and controller end points.
+            app.UseRouting();
+            app.UseEndpoints((config) =>
             {
-                // generic (non controller-specific) routes are defined here
+                config.MapControllers();
             });
-            loggerFactory.AddDebug();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

@@ -1,3 +1,4 @@
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,7 +15,7 @@ namespace OpenPass.IdController.UTest.Controllers
     [TestFixture]
     public class AuthenticatedControllerTests
     {
-        private Mock<IHostingEnvironment> _hostingEnvironmentMock;
+        private Mock<IWebHostEnvironment> _hostingEnvironmentMock;
         private Mock<IMetricHelper> _metricHelperMock;
         private Mock<IMemoryCache> _memoryCache;
         private Mock<IEmailHelper> _emailHelperMock;
@@ -27,7 +28,7 @@ namespace OpenPass.IdController.UTest.Controllers
         [SetUp]
         public void Setup()
         {
-            _hostingEnvironmentMock = new Mock<IHostingEnvironment>();
+            _hostingEnvironmentMock = new Mock<IWebHostEnvironment>();
             _metricHelperMock = new Mock<IMetricHelper>();
             _metricHelperMock.Setup(mh => mh.SendCounterMetric(It.IsAny<string>()));
             _identifierHelperMock = new Mock<IIdentifierHelper>();
@@ -55,7 +56,7 @@ namespace OpenPass.IdController.UTest.Controllers
         #region One-time password (OTP)
 
         [Test]
-        public void BadRequestWhenGenerationEmailIsInvalid()
+        public async Task BadRequestWhenGenerationEmailIsInvalid()
         {
             // Arrange
             _emailHelperMock.Setup(e => e.IsValidEmail(It.IsAny<string>())).Returns(false);
@@ -63,7 +64,7 @@ namespace OpenPass.IdController.UTest.Controllers
             var request = new GenerateRequest();
 
             // Act
-            var response = _authenticatedController.GenerateOtp(request);
+            var response = await _authenticatedController.GenerateOtp(request);
 
             // Assert
             Assert.IsAssignableFrom<BadRequestResult>(response);
@@ -116,13 +117,13 @@ namespace OpenPass.IdController.UTest.Controllers
         }
 
         [Test]
-        public void ValidRequestGeneration()
+        public async Task ValidRequestGeneration()
         {
             // Arrange
             var request = new GenerateRequest();
 
             // Act
-            var response = _authenticatedController.GenerateOtp(request);
+            var response = await _authenticatedController.GenerateOtp(request);
 
             // Assert
             Assert.IsAssignableFrom<NoContentResult>(response);
@@ -154,14 +155,14 @@ namespace OpenPass.IdController.UTest.Controllers
         }
 
         [Test]
-        public void GenerateOTPAndAddToCache()
+        public async Task GenerateOTPAndAddToCache()
         {
             // Arrange
             var email = "example@mail.com";
             var request = new GenerateRequest { Email = email };
 
             // Act
-            _authenticatedController.GenerateOtp(request);
+            await _authenticatedController.GenerateOtp(request);
 
             // Assert
             _memoryCache.Verify(m => m.CreateEntry(It.Is<string>(s => s == email)), Times.Once);
@@ -179,10 +180,14 @@ namespace OpenPass.IdController.UTest.Controllers
             var request = new GenerateRequest { Email = email };
 
             // Act
-            _authenticatedController.GenerateOtp(request);
+            _authenticatedController.GenerateOtp(request).Wait();
 
             // Assert
-            _emailHelperMock.Verify(e => e.SendOtpEmail(It.Is<string>(s => s == email), It.Is<string>(c => c == code)), Times.Once);
+            _emailHelperMock.Verify(e => e.SendOtpEmail(
+                It.Is<string>(s => s == email), 
+                It.Is<string>(c => c == code),
+                It.IsAny<CancellationToken>()), 
+                Times.Once);
         }
 
         [Test]
@@ -203,7 +208,7 @@ namespace OpenPass.IdController.UTest.Controllers
 
             // Generate
             var requestGenerate = new GenerateRequest { Email = email };
-            var response = _authenticatedController.GenerateOtp(requestGenerate);
+            var response = await _authenticatedController.GenerateOtp(requestGenerate);
             Assert.IsAssignableFrom<NoContentResult>(response);
 
             // Validate
@@ -238,7 +243,7 @@ namespace OpenPass.IdController.UTest.Controllers
 
             // Generate
             var requestGenerate = new GenerateRequest { Email = email };
-            var response = _authenticatedController.GenerateOtp(requestGenerate);
+            var response = await _authenticatedController.GenerateOtp(requestGenerate);
             Assert.IsAssignableFrom<NoContentResult>(response);
 
             // Validate

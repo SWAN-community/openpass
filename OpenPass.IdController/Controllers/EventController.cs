@@ -6,6 +6,7 @@ using OpenPass.IdController.Helpers;
 namespace OpenPass.IdController.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class EventController : Controller
     {
         private static readonly string _metricPrefix = "event";

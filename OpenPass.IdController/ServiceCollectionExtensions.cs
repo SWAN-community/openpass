@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using OpenPass.IdController.Email;
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Helpers.Adapters;
 using OpenPass.IdController.Helpers.Configuration;
@@ -21,6 +23,22 @@ namespace OpenPass.IdController
 
         public static IServiceCollection AddEmailHelper(this IServiceCollection services)
         {
+            services.AddSingleton<IEmailProvider>((s) =>
+            {
+                // Creates a new email provider based on the MailKit open
+                // source project. This is considered more robust and flexible 
+                // than the SmtpClient provided by Microsoft.
+                // See https://dotnetcoretutorials.com/2017/11/02/using-mailkit-send-receive-email-asp-net-core/
+                var config = s.GetRequiredService<IConfigurationManager>();
+                return new MailKitProvider(
+                    config.SmtpSettings.Host,
+                    config.SmtpSettings.Port,
+                    config.SmtpSettings.UserName,
+                    config.SmtpSettings.Password,
+                    MailKit.Security.SecureSocketOptions.SslOnConnect,
+                    s.GetRequiredService<ILoggerFactory>()
+                        .CreateLogger<MailKitProvider>());
+            });
             services.AddSingleton<IEmailHelper, EmailHelper>();
 
             return services;

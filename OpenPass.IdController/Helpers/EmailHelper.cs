@@ -1,16 +1,17 @@
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Net;
-using System.Net.Mail;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using OpenPass.IdController.Email;
 using OpenPass.IdController.Helpers.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Net.Mail;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace OpenPass.IdController.Helpers
 {
     public interface IEmailHelper
     {
-        Task SendOtpEmail(string recipient, string otp);
+        Task SendOtpEmail(string recipient, string otp, CancellationToken stopToken);
 
         bool IsValidEmail(string email);
     }
@@ -21,44 +22,25 @@ namespace OpenPass.IdController.Helpers
 
         private readonly IMetricHelper _metricsHelper;
         private readonly ILogger _logger;
-
         private readonly IViewRenderHelper _viewRenderHelper;
         private readonly IConfigurationManager _configurationManager;
-        private readonly SmtpClient _smtpClient;
+        private readonly IEmailProvider _emailProvider;
 
         public EmailHelper(
             IMetricHelper metricsHelper,
             IViewRenderHelper viewRenderHelper,
             IConfigurationManager configurationManager,
+            IEmailProvider emailProvider,
             ILogger<EmailHelper> logger)
         {
             _metricsHelper = metricsHelper;
             _viewRenderHelper = viewRenderHelper;
             _configurationManager = configurationManager;
             _logger = logger;
-
-            _smtpClient = CreateSmtpClient();
+            _emailProvider = emailProvider;
         }
 
-        private SmtpClient CreateSmtpClient()
-        {
-            var smtpClient = new SmtpClient(_configurationManager.SmtpSettings.Host, _configurationManager.SmtpSettings.Port)
-            {
-                EnableSsl = _configurationManager.SmtpSettings.EnableSsl
-            };
-
-            if (!(string.IsNullOrEmpty(_configurationManager.SmtpSettings.UserName)
-                    || string.IsNullOrEmpty(_configurationManager.SmtpSettings.Password)))
-                smtpClient.Credentials =
-                    new NetworkCredential(_configurationManager.SmtpSettings.UserName, _configurationManager.SmtpSettings.Password);
-
-            // Add callback for metrics and logs
-            smtpClient.SendCompleted += new SendCompletedEventHandler(SendCompletedCallback);
-
-            return smtpClient;
-        }
-
-        public async Task SendOtpEmail(string recipient, string otp)
+        public async Task SendOtpEmail(string recipient, string otp, CancellationToken stopToken)
         {
             var viewData = new Dictionary<string, object>
             {
@@ -68,7 +50,7 @@ namespace OpenPass.IdController.Helpers
             var subject = "OpenPass Verification Code";
             var body = await _viewRenderHelper.RenderToStringAsync("Email/VerificationCode", null, viewData);
 
-            SendEmailAsync(recipient, subject, body, "otp", isBodyHtml: true);
+            await SendEmailAsync(recipient, subject, body, "otp", stopToken, isBodyHtml: true);
         }
 
         public bool IsValidEmail(string email)
@@ -87,10 +69,18 @@ namespace OpenPass.IdController.Helpers
             }
         }
 
-        private void SendEmailAsync(string recipient, string subject, string body, string token, bool isBodyHtml = false)
+        private async Task SendEmailAsync(
+            string recipient, 
+            string subject, 
+            string body, 
+            string token, 
+            CancellationToken stopToken, 
+            bool isBodyHtml = false)
         {
             var senderMailAddress =
-                new MailAddress(_configurationManager.SmtpSettings.Address, _configurationManager.SmtpSettings.DisplayName);
+                new MailAddress(
+                    _configurationManager.SmtpSettings.Address, 
+                    _configurationManager.SmtpSettings.DisplayName);
             var recipientMailAddress = new MailAddress(recipient);
 
             var message = new MailMessage
@@ -98,31 +88,31 @@ namespace OpenPass.IdController.Helpers
                 From = senderMailAddress,
                 To = { recipientMailAddress },
                 Subject = subject,
-                Body =  body,
+                Body = body,
                 IsBodyHtml = isBodyHtml
             };
 
-            _smtpClient.SendAsync(message, token);
-        }
-
-        #region Callback
-
-        // Using async method to avoid blocking the calling thread, this callback
-        // will be called when the operation is completed
-        private void SendCompletedCallback(object token, AsyncCompletedEventArgs e)
-        {
             var metric = $"{_metricPrefix}.{token}";
-            if (e.Error != null)
+            var success = false;
+            try
             {
-                _metricsHelper.SendCounterMetric($"{metric}.error");
-                _logger.LogError("Error when sending email", e.Error);
+                success = await _emailProvider.Send(message, stopToken);
             }
-            else
+            catch (Exception ex)
             {
-                _metricsHelper.SendCounterMetric($"{metric}.success");
+                _logger.LogError("Error when sending email", ex);
+            }
+            finally
+            {
+                if (success)
+                {
+                    _metricsHelper.SendCounterMetric($"{metric}.success");
+                }
+                else
+                {
+                    _metricsHelper.SendCounterMetric($"{metric}.error");
+                }
             }
         }
-
-        #endregion Callback
     }
 }

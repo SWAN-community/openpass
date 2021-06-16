@@ -5,6 +5,7 @@ using OpenPass.IdController.Helpers;
 namespace OpenPass.IdController.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class UnAuthenticatedController : Controller
     {
         private static readonly string _metricPrefix = "unauthenticated";

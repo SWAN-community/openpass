@@ -3,4 +3,4 @@ obj/
 node_modules
 OpenPass.IdController/wwwroot/js
 .vs/
-
+launchSettings.json

@@ -4,6 +4,7 @@ using OpenPass.IdController.Helpers;
 namespace OpenPass.IdController.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class PortalController : Controller
     {
         private const string _metricPrefix = "controls";
