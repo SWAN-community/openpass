@@ -12,13 +12,13 @@ namespace OpenPass.IdController.Helpers.Configuration
             _configuration = configuration;
         }
 
-        public SmtpSettings SmtpSettings => GetSectionByName<SmtpSettings>(ConfigSectionNames.SmtpSettings);
-        public Uid2Configuration Uid2Configuration => GetSectionByName<Uid2Configuration>(ConfigSectionNames.Uid2Configuration);
+        public SmtpSettings SmtpSettings => GetSection<SmtpSettings>();
+        public Uid2Configuration Uid2Configuration => GetSection<Uid2Configuration>();
 
-        private T GetSectionByName<T>(string sectionName)
+        private T GetSection<T>()
             where T : class
         {
-            return _configuration.GetSection(sectionName).Get<T>();
+            return _configuration.GetSection(typeof(T).Name).Get<T>();
         }
     }
 }

@@ -10,6 +10,9 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swan.Client;
+using Swan.Client.Model.Configuration;
+using Owid.Client.Model.Configuration;
 
 namespace OpenPass.IdController
 {
@@ -63,8 +66,21 @@ namespace OpenPass.IdController
 
             services.AddIdentifierHelper();
 
+            // Add SWAN connection.
+            var swanConfig = Configuration.GetSection("SwanConfiguration")
+                    .Get<SwanConfiguration>();
+            services.AddSingleton<ISwanConnection>(
+                new SwanConnection(swanConfig));
+            services.AddSingleton<OwidConfiguration>(
+                swanConfig.OwidConfiguration);
+                
             // Configure MVC, controllers and metrics.
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddMvc()
+                .AddApplicationPart(Assembly.Load(new AssemblyName(
+                    "Swan.Client.Controllers")))
+                .AddApplicationPart(Assembly.Load(new AssemblyName(
+                    "Owid.Client.Controllers")))
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddControllers();
             services.AddMetrics();
 

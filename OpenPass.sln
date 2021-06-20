@@ -17,6 +17,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Owid.Client.Test", "Owid\Ow
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpenPass.IdController.UTest", "OpenPass.IdController.UTest\OpenPass.IdController.UTest.csproj", "{2032D3B6-BE6C-4F15-ACE9-A771F8F63F9E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Swan.Client.Controllers", "Swan\Swan.Client.Controllers\Swan.Client.Controllers.csproj", "{D1E128D7-9065-4C75-AD44-296B023EDFB6}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "OpenPass.IdController.UI", "OpenPass.IdController.UI\OpenPass.IdController.UI.njsproj", "{415F1801-F907-43E7-9F02-BC1DEA648430}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Owid.Client.Controllers", "Owid\Owid.Client.Controllers\Owid.Client.Controllers.csproj", "{006C8869-9694-4C4D-A809-4F8CBBA16317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +57,18 @@ Global
 		{2032D3B6-BE6C-4F15-ACE9-A771F8F63F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2032D3B6-BE6C-4F15-ACE9-A771F8F63F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2032D3B6-BE6C-4F15-ACE9-A771F8F63F9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1E128D7-9065-4C75-AD44-296B023EDFB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E128D7-9065-4C75-AD44-296B023EDFB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E128D7-9065-4C75-AD44-296B023EDFB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E128D7-9065-4C75-AD44-296B023EDFB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{415F1801-F907-43E7-9F02-BC1DEA648430}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415F1801-F907-43E7-9F02-BC1DEA648430}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415F1801-F907-43E7-9F02-BC1DEA648430}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415F1801-F907-43E7-9F02-BC1DEA648430}.Release|Any CPU.Build.0 = Release|Any CPU
+		{006C8869-9694-4C4D-A809-4F8CBBA16317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{006C8869-9694-4C4D-A809-4F8CBBA16317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{006C8869-9694-4C4D-A809-4F8CBBA16317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{006C8869-9694-4C4D-A809-4F8CBBA16317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
