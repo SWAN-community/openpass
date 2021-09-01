@@ -29,6 +29,7 @@
     <Content Update="appsettings*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
     <Content Remove="log\**" />
   </ItemGroup>
   <ItemGroup>
@@ -39,5 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="log\**" />
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   </ItemGroup>
 </Project>

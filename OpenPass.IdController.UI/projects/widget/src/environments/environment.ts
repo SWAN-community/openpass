@@ -9,7 +9,11 @@ export const environment = {
   appHost,
   ...defaultEnv,
   production: false,
+<<<<<<< HEAD:OpenPass.IdController.UI/projects/widget/src/environments/environment.ts
   idControllerAppUrl: appHost + '/open-pass',
+=======
+  idControllerAppUrl: 'https://localhost:4200/open-pass',
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/widget/src/environments/environment.ts
 };
 
 /*

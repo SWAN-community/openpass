@@ -16,7 +16,11 @@ import { OtpWidgetState } from '@store/otp-widget/otp-widget.state';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { WINDOW } from '@utils/injection-tokens';
+<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/app.module.ts
 import { TrackingDataInterceptor } from './interceptors/tracking-data.interceptor';
+=======
+import { OriginInterceptor } from './interceptors/origin.interceptor';
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/app.module.ts
 
 export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -28,7 +32,11 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
     RouterModule,
     AppRoutingModule,
     HttpClientModule,
+<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/app.module.ts
     NgxsModule.forRoot([OpenerState, OtpWidgetState, AuthState, SsoState, ControlsState], {
+=======
+    NgxsModule.forRoot([OpenerState, OtpWidgetState, AuthState, SsoState], {
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/app.module.ts
       developmentMode: !environment.production,
     }),
     NgxsDispatchPluginModule.forRoot(),
@@ -43,7 +51,11 @@ export const createTranslateLoader = (http: HttpClient): TranslateHttpLoader =>
   ],
   providers: [
     { provide: WINDOW, useFactory: windowFactory },
+<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/app.module.ts
     { provide: HTTP_INTERCEPTORS, useClass: TrackingDataInterceptor, multi: true },
+=======
+    { provide: HTTP_INTERCEPTORS, useClass: OriginInterceptor, multi: true },
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/app.module.ts
   ],
   bootstrap: [AppComponent],
 })

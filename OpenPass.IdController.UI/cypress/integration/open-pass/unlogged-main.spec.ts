@@ -1,6 +1,9 @@
 import { UnloggedMainPage } from '../../pages/unlogged-main.page';
 import { LocalStorageHelper } from '../../helpers/local-storage-helper';
+<<<<<<< HEAD
 import { AuthHelper } from '../../helpers/interceptors/auth-helper';
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
 
 context('Unlogged:Main page', () => {
   let page: UnloggedMainPage;
@@ -14,6 +17,7 @@ context('Unlogged:Main page', () => {
     page.pageComponent.getActionBtn().should('be.visible');
   });
 
+<<<<<<< HEAD
   it('should forbid to proceed without accepting terms', () => {
     page.pageComponent.getActionBtn().should('be.disabled');
     page.pageComponent.getTermsCheckbox().click();
@@ -28,6 +32,8 @@ context('Unlogged:Main page', () => {
     cy.get(waitingToken).its('response.statusCode').should('be.equal', 200);
   });
 
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   it('should redirect to /unauthenticated/recognized if token is present', () => {
     LocalStorageHelper.setFakeToken();
     page.goToPage();

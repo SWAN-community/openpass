@@ -1,41 +1,47 @@
 import { ApplicationRef, DoBootstrap, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
+import { environment } from '../environments/environment';
 import { createCustomElement } from '@angular/elements';
-import { windowFactory } from '@utils/window-factory';
-import { deployUrl } from '@utils/deploy-url-factory';
-import { DEPLOY_URL, WINDOW } from '@utils/injection-tokens';
-import { IdentificationComponent } from './containers/identification/identification.component';
-import { TranslationModule } from './containers/shared/translation.module';
-import { LandingComponent } from './containers/landing/landing.component';
-import { SnackBarComponent } from '@components/snack-bar/snack-bar.component';
-import { ViewContainerModule } from '@directives/view-container.module';
-import { TokensCatcherModule } from './containers/tokens-catcher/tokens-catcher.module';
+import { ViewContainerDirective } from './directives/view-container.directive';
+import { windowFactory } from './utils/window-factory';
+import { deployUrl } from './utils/deploy-url-factory';
+import { DEPLOY_URL, WINDOW } from './utils/injection-tokens';
+import { from, Observable } from 'rxjs';
+
+export class CustomTranslateLoader implements TranslateLoader {
+  getTranslation(lang: string): Observable<any> {
+    return from(import(`../assets/i18n/${lang}.json`));
+  }
+}
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, HttpClientModule, TranslationModule, ViewContainerModule, TokensCatcherModule],
+  declarations: [AppComponent, ViewContainerDirective],
+  imports: [
+    BrowserModule,
+    TranslateModule.forRoot({
+      defaultLanguage: 'en',
+      loader: {
+        provide: TranslateLoader,
+        useClass: CustomTranslateLoader,
+      },
+    }),
+  ],
   providers: [
     { provide: WINDOW, useFactory: windowFactory },
     { provide: DEPLOY_URL, useFactory: deployUrl },
   ],
+  bootstrap: environment.production ? [] : [AppComponent],
 })
 export class AppModule implements DoBootstrap {
-  constructor(private injector: Injector) {}
-
-  ngDoBootstrap(appRef: ApplicationRef) {
-    const componentsMap = {
-      'wdgt-app': AppComponent,
-      'wdgt-identification': IdentificationComponent,
-      'wdgt-landing': LandingComponent,
-      'wdgt-snack-bar': SnackBarComponent,
-    };
-
-    Object.entries(componentsMap).forEach(([tagName, component]) => {
-      const customComponent = createCustomElement(component, { injector: this.injector });
-      customElements.define(tagName, customComponent);
-    });
+  constructor(private injector: Injector) {
+    if (environment.production) {
+      const webElement = createCustomElement(AppComponent, { injector });
+      customElements.define('wdgt-identification', webElement);
+    }
   }
+
+  ngDoBootstrap(appRef: ApplicationRef) {}
 }

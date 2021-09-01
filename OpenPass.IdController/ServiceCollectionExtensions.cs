@@ -1,5 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
+<<<<<<< HEAD
 using OpenPass.IdController.DataAccess;
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Helpers.Adapters;
 using OpenPass.IdController.Helpers.Configuration;
@@ -8,12 +11,15 @@ namespace OpenPass.IdController
 {
     public static class ServiceCollectionExtensions
     {
+<<<<<<< HEAD
         public static IServiceCollection AddConfigurationHelper(this IServiceCollection services)
         {
             services.AddSingleton<IConfigurationHelper, ConfigurationHelper>();
             return services;
         }
 
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
         public static IServiceCollection AddConfigurationManager(this IServiceCollection services)
         {
             services.AddSingleton<IConfigurationManager, ConfigurationManager>();
@@ -67,11 +73,14 @@ namespace OpenPass.IdController
 
             return services;
         }
+<<<<<<< HEAD
 
         public static IServiceCollection AddUserPreferencesRepository(this IServiceCollection services)
         {
             services.AddSingleton<IUserPreferencesRepository>(p => new StaticUserPreferencesRepository());
             return services;
         }
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     }
 }

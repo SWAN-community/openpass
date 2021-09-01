@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GapiService } from './gapi.service';
 import { WINDOW } from '@utils/injection-tokens';
+<<<<<<< HEAD
 import { environment } from '../../environments/environment.prod';
 
 const noop = () => {};
@@ -53,6 +54,16 @@ describe('GapiService', () => {
     };
     TestBed.configureTestingModule({
       providers: [{ provide: WINDOW, useValue: { gapi: windowGapiMock } }],
+=======
+import { windowFactory } from '@utils/window-factory';
+
+describe('GapiService', () => {
+  let service: GapiService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [{ provide: WINDOW, useFactory: windowFactory }],
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     });
     service = TestBed.inject(GapiService);
   });
@@ -60,6 +71,7 @@ describe('GapiService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+<<<<<<< HEAD
 
   it('should return the email', () => {
     expect(service.userEmail).toEqual('fake@mail.com');
@@ -86,4 +98,6 @@ describe('GapiService', () => {
     await service.attachCustomButton(document.createElement('button'));
     expect(attachClickHandlerSpy).toHaveBeenCalled();
   });
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
 });

@@ -14,6 +14,7 @@ export class AuthService {
   private storageUid2Token: string;
   @localStorage('openpass.email')
   private storageUserEmail: string;
+<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/services/auth.service.ts
 
   get uid2Token(): string {
     return this.storageUid2Token;
@@ -23,6 +24,21 @@ export class AuthService {
     return this.storageIfaToken;
   }
 
+=======
+
+  get isAuthenticated(): boolean {
+    return !!this.storageUid2Token || !!this.storageIfaToken;
+  }
+
+  get uid2Token(): string {
+    return this.storageUid2Token;
+  }
+
+  get ifaToken(): string {
+    return this.storageIfaToken;
+  }
+
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/services/auth.service.ts
   get isEmailUsed(): boolean {
     return !!this.storageUserEmail;
   }

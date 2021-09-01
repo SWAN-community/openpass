@@ -4,6 +4,7 @@ node_modules
 OpenPass.IdController/wwwroot/js
 .vs/
 
+<<<<<<< HEAD
 # Gradle
 .build/
 
@@ -12,3 +13,5 @@ OpenPass.IdController/wwwroot/js
 
 # Logs
 *.log
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f

@@ -13,10 +13,18 @@ context('SSO page', () => {
   });
 
   it('should render the google SSO button', () => {
+<<<<<<< HEAD
     page.googleButtonComponent.getButton().should('contain.text', 'Login with Google');
   });
 
   it('should render the facebook button', () => {
     page.facebookButtonComponent.getButton().should('contain.text', 'Login with Facebook');
+=======
+    page.googleButtonComponent.getButton().should('contain.text', 'Sign in');
+  });
+
+  it('should render the facebook button', () => {
+    page.facebookButtonComponent.getButton().find('iframe').should('exist');
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   });
 });

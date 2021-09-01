@@ -5,12 +5,20 @@
     "WITH": "With OpenPass:",
     "OPEN_PASS_PROS": {
       "INFORMATION": "You will support online businesses that provide you with tailored content.",
+<<<<<<< HEAD
       "ACCESS": "You have full control of your privacy, anytime at <a class=\"styled-a\" href=\"{{appHost}}/open-pass/under-construction\" target=\"_blank\">transparentadvertising.com</a>",
+=======
+      "ACCESS": "You have full control of your privacy, anytime at <a class=\"styled-a\" href=\"https://openpass.criteo.com/open-pass/under-construction\" target=\"_blank\">transparentadvertising.com</a>",
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
       "CONTROL": "Your email address is never shared without your permission"
     },
     "SUMMARY": {
       "TITLE": "How does OpenPass work?",
+<<<<<<< HEAD
       "DESCRIPTION": "With your permission, OpenPass converts your email address into a pseudonymous identifier. This identifier is shared with <b>trusted advertising partners</b> who use it to show you advertisements that they think are relevant to you. <a class=\"styled-a\" target=\"_blank\" href=\"{{appHost}}/open-pass/under-construction\">Learn more</a>"
+=======
+      "DESCRIPTION": "With your permission, OpenPass converts your email address into a pseudonymous identifier. This identifier is shared with <b>trusted advertising partners</b> who use it to show you advertisements that they think are relevant to you. <a class=\"styled-a\" target=\"_blank\" href=\"https://openpass.criteo.com/open-pass/under-construction\">Learn more</a>"
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     },
     "ACTION": "Sign in with OpenPass"
   },
@@ -23,6 +31,7 @@
     "OPEN_PASS_PROS": {
       "CONTROL": "Your information will never be shared with anyone without your permission"
     }
+<<<<<<< HEAD
   },
   "LANDING": {
     "TITLE": "Get more out of your online shopping",
@@ -38,5 +47,7 @@
   },
   "MESSAGES": {
     "SIGNED_IN": "<h3>Your are now managing your data with Openpass on {{brandDomain}}</h3><p>You are signed in as {{email}}. Update your <a href=\"{{appHost}}/open-pass/under-construction\" target=\"_blank\">privacy settings</a> now or any time you wish.</p>"
+=======
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   }
 }

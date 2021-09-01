@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SsoViewComponent } from './sso-view.component';
 import { AuthenticatedService } from '@rest/authenticated/authenticated.service';
 import { NgxsModule } from '@ngxs/store';
+<<<<<<< HEAD
 import { EventsService } from '@rest/events/events.service';
 import { stub } from '@utils/stub-factory';
 import { PostMessagesService } from '@services/post-messages.service';
@@ -25,6 +26,12 @@ class StubGoogleButtonComponent {}
   template: '',
 })
 class StubOrComponent {}
+=======
+import { EventsTrackingService } from '@services/events-tracking.service';
+import { stub } from '@utils/stub-factory';
+import { PostMessagesService } from '@services/post-messages.service';
+import { DialogWindowService } from '@services/dialog-window.service';
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
 
 describe('SsoViewComponent', () => {
   let component: SsoViewComponent;
@@ -37,9 +44,15 @@ describe('SsoViewComponent', () => {
         stub(PostMessagesService),
         stub(DialogWindowService),
         stub(AuthenticatedService),
+<<<<<<< HEAD
         stub(EventsService),
       ],
       declarations: [SsoViewComponent, StubGoogleButtonComponent, StubFacebookButtonComponent, StubOrComponent],
+=======
+        stub(EventsTrackingService),
+      ],
+      declarations: [SsoViewComponent],
+>>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     }).compileComponents();
   });
 
