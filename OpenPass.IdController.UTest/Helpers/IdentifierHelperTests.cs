@@ -4,6 +4,12 @@ using Moq;
 using NUnit.Framework;
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Helpers.Adapters;
+using Owid.Client.Model.Configuration;
+using Owid.Client;
+using Swan.Client;
+using Swan.Client.Model.Configuration;
+using System.Security.Cryptography;
+using System;
 
 namespace OpenPass.IdController.UTest.Helpers
 {
@@ -13,7 +19,7 @@ namespace OpenPass.IdController.UTest.Helpers
         private Mock<IMetricHelper> _metricHelperMock;
         private Mock<ICookieHelper> _cookieHelperMock;
         private Mock<IIdentifierAdapter> _uid2AdapterMock;
-
+        private ISwanConnection _swanConnection;
         private IdentifierHelper _identifierHelper;
 
         [SetUp]
@@ -23,11 +29,32 @@ namespace OpenPass.IdController.UTest.Helpers
             _metricHelperMock.Setup(mh => mh.SendCounterMetric(It.IsAny<string>()));
             _cookieHelperMock = new Mock<ICookieHelper>();
             _uid2AdapterMock = new Mock<IIdentifierAdapter>();
-
+            using (var rsa = new RSACryptoServiceProvider(512))
+            {
+                var parameters = rsa.ExportParameters(true);
+                var pubKeyBytes = rsa.ExportSubjectPublicKeyInfo();
+                var privKeyBytes = rsa.ExportPkcs8PrivateKey();
+                var publicPEM = new String(PemEncoding.Write("PUBLIC KEY", pubKeyBytes));
+                var privatePEM = new String(PemEncoding.Write("PRIVATE KEY", privKeyBytes));
+                _swanConnection = new SwanConnection(
+                    new SwanConfiguration()
+                    {
+                        AccessKey = "CMPKeySWAN",
+                        AccessNode = "51db.uk",
+                        Scheme = "https"
+                    },
+                    new OwidConfiguration()
+                    {
+                        Domain = "localhost",
+                        PrivateKey = privatePEM,
+                        PublicKey = publicPEM
+                    });
+            }
             _identifierHelper = new IdentifierHelper(
                 _metricHelperMock.Object,
                 _cookieHelperMock.Object,
-                _uid2AdapterMock.Object);
+                _uid2AdapterMock.Object,
+                _swanConnection);
         }
 
         [Test]
@@ -58,6 +85,7 @@ namespace OpenPass.IdController.UTest.Helpers
 
             // Assert
             Assert.AreNotEqual(expectedIfaToken, token);
+            Assert.IsTrue(new Owid.Client.Model.Owid(token).VerifyAsync().Result);
         }
 
         [TestCase("token", 1)]
