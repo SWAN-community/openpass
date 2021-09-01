@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OpenPass.IdController.Helpers;
 
 namespace OpenPass.IdController.Controllers

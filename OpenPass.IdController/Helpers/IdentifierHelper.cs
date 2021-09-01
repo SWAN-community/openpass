@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using OpenPass.IdController.Helpers.Adapters;
+using Swan.Client;
 
 namespace OpenPass.IdController.Helpers
 {
@@ -17,18 +18,23 @@ namespace OpenPass.IdController.Helpers
         private readonly ICookieHelper _cookieHelper;
         private readonly IMetricHelper _metricHelper;
         private readonly IIdentifierAdapter _uid2Adapter;
+        private readonly ISwanConnection _swanConnection;
 
         public IdentifierHelper(
             IMetricHelper metricHelper,
             ICookieHelper cookieHelper,
-            IIdentifierAdapter uid2Adapter)
+            IIdentifierAdapter uid2Adapter,
+            ISwanConnection swanConnection)
         {
             _metricHelper = metricHelper;
             _cookieHelper = cookieHelper;
             _uid2Adapter = uid2Adapter;
+            _swanConnection = swanConnection;
         }
 
-        public string GetOrCreateIfaToken(IRequestCookieCollection cookieContainer, string metricPrefix)
+        public string GetOrCreateIfaToken(
+            IRequestCookieCollection cookieContainer, 
+            string metricPrefix)
         {
             if (_cookieHelper.TryGetIdentifierForAdvertisingCookie(cookieContainer, out var ifaToken))
             {
@@ -36,8 +42,9 @@ namespace OpenPass.IdController.Helpers
             }
             else
             {
-                // Generate a random guid token for an anonymous user
-                ifaToken = GenerateRandomGuid();
+                // Use SWAN to generate a SWID.
+                ifaToken = _swanConnection.CreateSwid().Result.ToString();
+
                 _metricHelper.SendCounterMetric($"{metricPrefix}.ok");
             }
 

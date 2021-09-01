@@ -66,14 +66,14 @@ namespace OpenPass.IdController
 
             services.AddIdentifierHelper();
 
-            // Add SWAN connection.
-            var swanConfig = Configuration.GetSection("SwanConfiguration")
-                    .Get<SwanConfiguration>();
+            // Get the SWAN connection configuration and OWID configuration.
+            var owidConfig = Configuration.GetSection(
+                    "OwidConfiguration").Get<OwidConfiguration>();
+            services.AddSingleton(owidConfig);
             services.AddSingleton<ISwanConnection>(
-                new SwanConnection(swanConfig));
-            services.AddSingleton<OwidConfiguration>(
-                swanConfig.OwidConfiguration);
-                
+                new SwanConnection(Configuration.GetSection(
+                    "SwanConfiguration").Get<SwanConfiguration>(), owidConfig));            
+
             // Configure MVC, controllers and metrics.
             services.AddMvc()
                 .AddApplicationPart(Assembly.Load(new AssemblyName(

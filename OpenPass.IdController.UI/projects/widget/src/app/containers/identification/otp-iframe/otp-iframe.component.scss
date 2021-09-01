@@ -1,0 +1,62 @@
+:host {
+  &.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2147483647;
+
+    .container {
+      overflow: auto;
+
+      @media screen and (max-width: 800px) {
+        & {
+          padding: 0 1em;
+        }
+      }
+
+      iframe {
+        height: 650px;
+        position: relative;
+        margin-top: 5em;
+        margin-bottom: 1em;
+
+        @media screen and (max-width: 500px) {
+          & {
+            width: 90vw;
+          }
+        }
+
+        @media screen and (max-height: 800px) {
+          & {
+            margin-top: 1em;
+            margin-bottom: 1em;
+          }
+        }
+      }
+    }
+  }
+}
+
+.container {
+  height: 100%;
+  position: relative;
+}
+
+.backdrop {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  background: rgb(0 0 0 / 10%);
+}
+
+iframe {
+  border: none;
+  width: 400px;
+  margin: auto;
+  z-index: 1;
+  display: block;
+}

@@ -14,9 +14,22 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Models\Tracking\**" />
+    <Content Remove="Models\Tracking\**" />
+    <EmbeddedResource Remove="Models\Tracking\**" />
+    <None Remove="Models\Tracking\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\EventRequest.cs" />
+    <Compile Remove="Models\GenerateRequest.cs" />
+    <Compile Remove="Models\GenericRequest.cs" />
+    <Compile Remove="Models\ValidateRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="App.Metrics" Version="4.2.0" />
     <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.2.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
   </ItemGroup>
   <ItemGroup>
