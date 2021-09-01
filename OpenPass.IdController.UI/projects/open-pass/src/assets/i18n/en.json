@@ -53,27 +53,10 @@
     "ACTION": "Continue to site"
   },
   "NON_AUTH": {
-<<<<<<< HEAD
     "HEADING": "Almost there.",
     "SUB_HEADING": "Please review the <a href=\"/open-pass/under-construction\">terms and conditions</a> and check the box below. ",
     "CONDITION": "I agree to the OpenPass terms and conditions",
     "HINT": "OpenPass will use a cookie in order to provide you with personalized advertising based on your preferences. You have a right to access your personal data and a right to withdraw your consent and be forgotten at any time <a href=\"/open-pass/under-construction\">here</a>. For more information please read our <a href=\"/open-pass/under-construction\">privacy policy</a>",
-=======
-    "HEADING": "Get Access With",
-    "DESCRIPTION": "OpenPass is an independent service that secures your data. It allows you to control and personalize your advertising experience on <b>{{websiteName}}</b> with your explicit permission.",
-    "WITH": "With OpenPass:",
-    "OPEN_PASS_PROS": {
-      "INFORMATION": "You will support online businesses that provide you with tailored content.",
-      "ACCESS": "You have full control of your privacy, anytime at <a href=\"/open-pass/under-construction\" target=\"\">transparentadvertising.com</a>",
-      "CONTROL": "Your information is never shared without your permission"
-    },
-    "HINT": "OpenPass will use a cookie in order to provide you with personalized advertising based on your preferences. You have a right to access your personal data and a right to withdraw your consent and be forgotten at any time <a href=\"/open-pass/under-construction\">here</a>. For more information please read our <a href=\"/open-pass/under-construction\">privacy policy</a>",
-    "SUMMARY": {
-      "TITLE": "How does OpenPass work?",
-      "DESCRIPTION": "With your permission. OpenPass shares pseudonymous identifiers with <b>trusted advertising partners</b> who use it to show you advertisement that they think are relevant to you. <a target=\"_blank\" href=\"/open-pass/under-construction\">Learn more</a>"
-    },
-    "PREFERENCES": "<a href=\"/open-pass/under-construction\" target=\"_blank\">Click here</a> to manage your privacy settings and learn more about OpenPass",
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     "ACTION": "I agree & access with OpenPass"
   },
   "RECOGNIZED": {
@@ -86,7 +69,6 @@
     "DESCRIPTION": "Login or create your account in one click with",
     "GOOGLE": {
       "CONTINUE_AS": "Continue as {{email}}",
-<<<<<<< HEAD
       "SIGN_OUT": "Sign Out",
       "SIGN_WITH": "Login with Google"
     },
@@ -98,9 +80,5 @@
     "HEADING": "Hang tight!",
     "MESSAGE": "OpenPass is processing, you will be automatically redirected to {{redirectDomain}}",
     "COPY": "Better advertising experience by"
-=======
-      "SIGN_OUT": "Sign Out"
-    }
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   }
 }

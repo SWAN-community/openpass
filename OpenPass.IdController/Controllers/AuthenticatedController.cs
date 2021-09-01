@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace OpenPass.IdController.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class AuthenticatedController : Controller
     {
         private const int _otpCodeLifetimeMinutes = 15;
         private const string _metricPrefix = "authenticated";
 
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IMetricHelper _metricHelper;
         private readonly IMemoryCache _activeOtps; // Mapping: (email -> OTP)
         private readonly IEmailHelper _emailHelper;
@@ -24,7 +26,7 @@ namespace OpenPass.IdController.Controllers
         private readonly IIdentifierHelper _identifierHelper;
 
         public AuthenticatedController(
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             IMetricHelper metricRegistry,
             IMemoryCache memoryCache,
             IEmailHelper emailHelper,
@@ -50,7 +52,7 @@ namespace OpenPass.IdController.Controllers
         /// <returns>No content</returns>
         [HttpPost("otp/generate")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public IActionResult GenerateOtp([FromBody] GenerateRequest request)
+        public async Task<IActionResult> GenerateOtp([FromBody] GenerateRequest request)
         {
             var prefix = $"{_metricPrefix}.otp.generate";
 
@@ -67,8 +69,9 @@ namespace OpenPass.IdController.Controllers
             if (_hostingEnvironment.IsDevelopment())
                 Console.Out.WriteLine($"New OTP code generated (valid for {_otpCodeLifetimeMinutes} minutes): {request.Email} -> {otp}");
 
-            // Send email (async -> don't wait)
-            _emailHelper.SendOtpEmail(request.Email, otp);
+            // Send email waiting to ensure it's been sent otherwise the user
+            // could be disappointed when it doesn't arrive.
+            await _emailHelper.SendOtpEmail(request.Email, otp, this.HttpContext.RequestAborted);
 
             // Metrics
             _metricHelper.SendCounterMetric($"{prefix}.ok");

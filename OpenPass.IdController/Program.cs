@@ -27,6 +27,7 @@ namespace OpenPass.IdController
                 logging.ClearProviders();
                 logging.AddConsole();
             })
+            .UseDefaultServiceProvider(options => options.ValidateScopes = false)
             .UseStartup<Startup>();
 
         public static void ConfigureApp(IWebHostBuilder builder)

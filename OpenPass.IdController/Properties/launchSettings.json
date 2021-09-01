@@ -3,11 +3,16 @@
     "OpenPass.IdController": {
       "commandName": "Project",
       "launchBrowser": true,
+      "launchUrl": "swagger/index.html",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SmtpSettings:Host": "smtp.mail.us-east-1.awsapps.com",
+        "SmtpSettings:Port": "465",
+        "SmtpSettings:UserName": "no-reply@swan-demo.uk",
+        "SmtpSettings:Password": "Ffc2xScO7Rlb",
+        "SmtpSettings:Address": "no-reply@swan-demo.uk"
       },
-      "applicationUrl": "http://localhost:1234/",
-      "launchUrl": "swagger/index.html"
+      "applicationUrl": "http://localhost:1234/"
     }
   }
 }

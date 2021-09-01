@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <Prefer32Bit>false</Prefer32Bit>
@@ -14,33 +14,32 @@
     <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Models\Tracking\**" />
+    <Content Remove="Models\Tracking\**" />
+    <EmbeddedResource Remove="Models\Tracking\**" />
+    <None Remove="Models\Tracking\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\EventRequest.cs" />
+    <Compile Remove="Models\GenerateRequest.cs" />
+    <Compile Remove="Models\GenericRequest.cs" />
+    <Compile Remove="Models\ValidateRequest.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="App.Metrics" Version="4.2.0" />
-    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="3.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.ResponseCompression" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1.0" />
+    <PackageReference Include="App.Metrics.AspNetCore.Mvc" Version="4.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenPass.IdController.Email\OpenPass.IdController.Email.csproj" />
+    <ProjectReference Include="..\Owid\Owid.Client.Controllers\Owid.Client.Controllers.csproj" />
+    <ProjectReference Include="..\Swan\Swan.Client.Controllers\Swan.Client.Controllers.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Update="appsettings*.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-<<<<<<< HEAD
-    <Content Remove="log\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="log\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Remove="log\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="log\**" />
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
   </ItemGroup>
 </Project>

@@ -55,10 +55,7 @@ export class MessageSubscriptionService {
     const { ifaToken, uid2Token, isDeclined } = payload;
     this.cookiesService.setCookie(environment.cookieUid2Token, uid2Token, environment.cookieLifetimeDays);
     this.cookiesService.setCookie(environment.cookieIfaToken, ifaToken, environment.cookieLifetimeDays);
-<<<<<<< HEAD:OpenPass.IdController.UI/projects/widget/src/app/services/message-subscription.service.ts
     this.cookiesService.setCookie(environment.cookieOptoutFlag, '', -1);
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/widget/src/app/services/message-subscription.service.ts
     this.publicApiService.setUserData({ ifaToken, uid2Token, isDeclined });
   }
 }

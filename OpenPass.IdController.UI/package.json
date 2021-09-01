@@ -2,13 +2,8 @@
   "name": "open-pass",
   "version": "0.0.0",
   "scripts": {
-<<<<<<< HEAD:OpenPass.IdController.UI/package.json
     "start": "run-p -r start:open-pass start:widget",
     "start:backendless": "run-p -r start:open-pass:backendless start:widget:backendless",
-=======
-    "start": "npm run start:open-pass | npm run start:widget",
-    "start:backendless": "npm run start:open-pass:backendless | npm run start:widget:backendless",
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/package.json
     "start:widget": "node ./dev/widget-launcher.js && ng serve --project widget --proxy-config proxy/proxy.conf.js",
     "start:widget:backendless": "node ./dev/widget-launcher.js && ng serve --project widget --proxy-config proxy/proxy.backendless.conf.js",
     "start:open-pass": "ng serve --project open-pass --proxy-config proxy/proxy.conf.js",

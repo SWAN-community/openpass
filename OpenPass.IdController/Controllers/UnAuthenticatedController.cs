@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using OpenPass.IdController.Helpers;
 
 namespace OpenPass.IdController.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class UnAuthenticatedController : Controller
     {
         private static readonly string _metricPrefix = "unauthenticated";
@@ -13,14 +14,10 @@ namespace OpenPass.IdController.Controllers
         private readonly IMetricHelper _metricHelper;
         private readonly IIdentifierHelper _identifierHelper;
 
-<<<<<<< HEAD
         public UnAuthenticatedController(
             IMetricHelper metricHelper,
             ICookieHelper cookieHelper,
             IIdentifierHelper identifierHelper)
-=======
-        public UnAuthenticatedController(IMetricHelper metricHelper, ICookieHelper cookieHelper, IIdentifierHelper identifierHelper)
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
         {
             _metricHelper = metricHelper;
             _cookieHelper = cookieHelper;

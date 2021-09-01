@@ -1,10 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
 import { Observable } from 'rxjs';
-=======
-import { Observable, Subscription } from 'rxjs';
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
 import { Actions, ofActionDispatched, Select, Store } from '@ngxs/store';
 import { OpenerState } from '@store/otp-widget/opener.state';
 import { Dispatch } from '@ngxs-labs/dispatch-decorator';
@@ -30,10 +26,6 @@ export class AuthViewComponent implements OnInit, OnDestroy {
   @Select(AuthState.fullState) authState$: Observable<IAuthState>;
 
   isAcceptAgreement = false;
-<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
-=======
-  private authSubscriptions: Subscription;
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
 
   constructor(private store: Store, private router: Router, private actions$: Actions) {}
 
@@ -59,21 +51,12 @@ export class AuthViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
     this.actions$
       .pipe(ofActionDispatched(ReceiveToken), untilDestroyed(this))
-=======
-    this.authSubscriptions = this.actions$
-      .pipe(ofActionDispatched(ReceiveToken))
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
       .subscribe(() => this.router.navigate(['agreement']));
   }
 
   ngOnDestroy() {
-<<<<<<< HEAD:OpenPass.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
-=======
-    this.authSubscriptions?.unsubscribe?.();
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f:Criteo.IdController.UI/projects/open-pass/src/app/containers/otp-widget/auth-view/auth-view.component.ts
     this.setDefaultState();
   }
 }

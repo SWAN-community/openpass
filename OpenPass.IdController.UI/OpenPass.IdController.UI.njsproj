@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{415f1801-f907-43e7-9f02-bc1dea648430}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectView>ProjectFiles</ProjectView>
+    <StartupFile>projects\open-pass\karma.conf.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">16.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <StartWebBrowser>True</StartWebBrowser>
+    <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
+    <NodejsPort>4200</NodejsPort>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="angular.json" />
+    <Content Include="cypress.json" />
+    <Content Include="package-lock.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
+    <Content Include="cypress\.eslintrc.json" />
+    <Content Include="dev\widget-launcher.js" />
+    <Content Include="proxy\proxy.backendless.conf.js" />
+    <Content Include="proxy\proxy.conf.js" />
+    <Content Include="cypress\fixtures\example.json" />
+    <Content Include="cypress\fixtures\foo.json" />
+    <Content Include="cypress\fixtures\profile.json" />
+    <Content Include="cypress\fixtures\users.json" />
+    <Content Include="cypress\plugins\index.js" />
+    <Content Include="cypress\support\commands.js" />
+    <Content Include="cypress\support\index.js" />
+    <Content Include="projects\open-pass\.eslintrc.json" />
+    <Content Include="projects\open-pass\tsconfig.spec.json" />
+    <Content Include="projects\open-pass\karma.conf.js" />
+    <Content Include="projects\widget\.eslintrc.json" />
+    <Content Include="projects\widget\tsconfig.spec.json" />
+    <Content Include="projects\widget\karma.conf.js" />
+    <Content Include="projects\open-pass\src\index.html" />
+    <Content Include="projects\open-pass\src\favicon.ico" />
+    <Content Include="projects\open-pass\src\app\app.component.html" />
+    <Content Include="projects\open-pass\src\app\components\facebook-auth-button\facebook-auth-button.component.html" />
+    <Content Include="projects\open-pass\src\app\components\facebook-auth-small\facebook-auth-small.component.html" />
+    <Content Include="projects\open-pass\src\app\components\google-auth-button\google-auth-button.component.html" />
+    <Content Include="projects\open-pass\src\app\components\google-auth-small\google-auth-small.component.html" />
+    <Content Include="projects\open-pass\src\app\components\navigation\navigation.component.html" />
+    <Content Include="projects\open-pass\src\app\components\open-pass-details\open-pass-details.component.html" />
+    <Content Include="projects\open-pass\src\app\components\shared\copyright\copyright.component.html" />
+    <Content Include="projects\open-pass\src\app\components\shared\or-hr\or-hr.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\otp-widget.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\unauthenticated\unauthenticated.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\under-construction\under-construction.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\agreement-view\agreement-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\already-signed-view\already-signed-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\auth-view\auth-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\main-view\main-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\otp-widget\sso-view\sso-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\unauthenticated\main-view\main-view.component.html" />
+    <Content Include="projects\open-pass\src\app\containers\unauthenticated\recognized-view\recognized-view.component.html" />
+    <Content Include="projects\open-pass\src\assets\i18n\en.json" />
+    <Content Include="projects\open-pass\src\assets\i18n\ja.json" />
+    <Content Include="projects\open-pass\src\assets\images\facebook-btn.png" />
+    <Content Include="projects\open-pass\src\assets\images\google-btn.png" />
+    <Content Include="projects\open-pass\src\assets\images\icon-email.png" />
+    <Content Include="projects\open-pass\src\assets\images\imprv-cont.png" />
+    <Content Include="projects\open-pass\src\assets\images\ntwrk.png" />
+    <Content Include="projects\open-pass\src\assets\images\o-logo.png" />
+    <Content Include="projects\open-pass\src\assets\images\open-pass-logo-sm.png" />
+    <Content Include="projects\open-pass\src\assets\images\open-pass-logo.png" />
+    <Content Include="projects\open-pass\src\assets\images\quality.png" />
+    <Content Include="projects\open-pass\src\assets\images\seen-ads.png" />
+    <Content Include="projects\open-pass\src\assets\images\support.png" />
+    <Content Include="projects\widget\src\index.html" />
+    <Content Include="projects\widget\src\favicon.ico" />
+    <Content Include="projects\widget\src\app\app.component.html" />
+    <Content Include="projects\widget\src\assets\widget.js" />
+    <Content Include="projects\widget\src\assets\widget.min.js" />
+    <Content Include="projects\widget\src\app\components\open-pass-details\open-pass-details.component.html" />
+    <Content Include="projects\widget\src\app\containers\otp-iframe\otp-iframe.component.html" />
+    <Content Include="projects\widget\src\app\containers\otp-widget\otp-widget.component.html" />
+    <Content Include="projects\widget\src\app\containers\unlogged\unlogged.component.html" />
+    <Content Include="projects\widget\src\assets\i18n\en.json" />
+    <Content Include="projects\widget\src\assets\i18n\ja.json" />
+    <Content Include="projects\widget\src\assets\images\icon-email.png" />
+    <Content Include="projects\widget\src\assets\images\imprv-cont.png" />
+    <Content Include="projects\widget\src\assets\images\ntwrk.png" />
+    <Content Include="projects\widget\src\assets\images\open-pass-logo.png" />
+    <Content Include="projects\widget\src\assets\images\quality.png" />
+    <Content Include="projects\widget\src\assets\images\seen-ads.png" />
+    <Content Include="projects\widget\src\assets\images\support.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="cypress" />
+    <Folder Include="cypress\fixtures" />
+    <Folder Include="cypress\helpers" />
+    <Folder Include="cypress\helpers\interceptors" />
+    <Folder Include="cypress\integration" />
+    <Folder Include="cypress\integration\open-pass" />
+    <Folder Include="cypress\pages" />
+    <Folder Include="cypress\pages\components" />
+    <Folder Include="cypress\pages\components\agreement" />
+    <Folder Include="cypress\pages\components\auth" />
+    <Folder Include="cypress\pages\components\main" />
+    <Folder Include="cypress\pages\components\shared" />
+    <Folder Include="cypress\pages\components\signed" />
+    <Folder Include="cypress\pages\components\sso" />
+    <Folder Include="cypress\pages\components\unlogged-main" />
+    <Folder Include="cypress\pages\components\unlogged-recognized" />
+    <Folder Include="cypress\plugins" />
+    <Folder Include="cypress\support" />
+    <Folder Include="dev" />
+    <Folder Include="projects" />
+    <Folder Include="projects\open-pass" />
+    <Folder Include="projects\open-pass\src" />
+    <Folder Include="projects\open-pass\src\app" />
+    <Folder Include="projects\open-pass\src\app\components" />
+    <Folder Include="projects\open-pass\src\app\components\facebook-auth-button" />
+    <Folder Include="projects\open-pass\src\app\components\facebook-auth-small" />
+    <Folder Include="projects\open-pass\src\app\components\google-auth-button" />
+    <Folder Include="projects\open-pass\src\app\components\google-auth-small" />
+    <Folder Include="projects\open-pass\src\app\components\navigation" />
+    <Folder Include="projects\open-pass\src\app\components\open-pass-details" />
+    <Folder Include="projects\open-pass\src\app\components\shared" />
+    <Folder Include="projects\open-pass\src\app\components\shared\copyright" />
+    <Folder Include="projects\open-pass\src\app\components\shared\or-hr" />
+    <Folder Include="projects\open-pass\src\app\containers" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget\agreement-view" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget\already-signed-view" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget\auth-view" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget\main-view" />
+    <Folder Include="projects\open-pass\src\app\containers\otp-widget\sso-view" />
+    <Folder Include="projects\open-pass\src\app\containers\reset" />
+    <Folder Include="projects\open-pass\src\app\containers\unauthenticated" />
+    <Folder Include="projects\open-pass\src\app\containers\unauthenticated\main-view" />
+    <Folder Include="projects\open-pass\src\app\containers\unauthenticated\recognized-view" />
+    <Folder Include="projects\open-pass\src\app\containers\under-construction" />
+    <Folder Include="projects\open-pass\src\app\enums" />
+    <Folder Include="projects\open-pass\src\app\guards" />
+    <Folder Include="projects\open-pass\src\app\interceptors" />
+    <Folder Include="projects\open-pass\src\app\resolvers" />
+    <Folder Include="projects\open-pass\src\app\rest" />
+    <Folder Include="projects\open-pass\src\app\rest\authenticated" />
+    <Folder Include="projects\open-pass\src\app\rest\events" />
+    <Folder Include="projects\open-pass\src\app\rest\otp" />
+    <Folder Include="projects\open-pass\src\app\rest\unauthenticated" />
+    <Folder Include="projects\open-pass\src\app\services" />
+    <Folder Include="projects\open-pass\src\app\store" />
+    <Folder Include="projects\open-pass\src\app\store\otp-widget" />
+    <Folder Include="projects\open-pass\src\app\utils" />
+    <Folder Include="projects\open-pass\src\assets" />
+    <Folder Include="projects\open-pass\src\assets\fonts" />
+    <Folder Include="projects\open-pass\src\assets\i18n" />
+    <Folder Include="projects\open-pass\src\assets\images" />
+    <Folder Include="projects\open-pass\src\environments" />
+    <Folder Include="projects\open-pass\src\styles" />
+    <Folder Include="projects\shared" />
+    <Folder Include="projects\shared\enums" />
+    <Folder Include="projects\shared\types" />
+    <Folder Include="projects\shared\types\public-api" />
+    <Folder Include="projects\shared\utils" />
+    <Folder Include="projects\widget" />
+    <Folder Include="projects\widget\src" />
+    <Folder Include="projects\widget\src\app" />
+    <Folder Include="projects\widget\src\app\components" />
+    <Folder Include="projects\widget\src\app\components\open-pass-details" />
+    <Folder Include="projects\widget\src\app\containers" />
+    <Folder Include="projects\widget\src\app\containers\otp-iframe" />
+    <Folder Include="projects\widget\src\app\containers\otp-widget" />
+    <Folder Include="projects\widget\src\app\containers\redirect" />
+    <Folder Include="projects\widget\src\app\containers\unlogged" />
+    <Folder Include="projects\widget\src\app\directives" />
+    <Folder Include="projects\widget\src\app\enums" />
+    <Folder Include="projects\widget\src\app\pipes" />
+    <Folder Include="projects\widget\src\app\services" />
+    <Folder Include="projects\widget\src\app\utils" />
+    <Folder Include="projects\widget\src\assets" />
+    <Folder Include="projects\widget\src\assets\i18n" />
+    <Folder Include="projects\widget\src\assets\images" />
+    <Folder Include="projects\widget\src\environments" />
+    <Folder Include="projects\widget-launcher" />
+    <Folder Include="projects\widget-launcher\src" />
+    <Folder Include="projects\widget-launcher\src\environment" />
+    <Folder Include="projects\widget-launcher\src\utils" />
+    <Folder Include="proxy" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,6 @@
+[submodule "Swan"]
+	path = Swan
+	url = https://github.com/SWAN-community/swan-dotnet.git
+[submodule "Owid"]
+	path = Owid
+	url = https://github.com/SWAN-community/owid-dotnet.git

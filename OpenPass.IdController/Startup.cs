@@ -8,15 +8,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Swan.Client;
+using Swan.Client.Model.Configuration;
+using Owid.Client.Model.Configuration;
 
 namespace OpenPass.IdController
 {
     internal class Startup
     {
-        private readonly IHostingEnvironment _env;
+        private readonly IWebHostEnvironment _env;
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             _env = env;
@@ -33,11 +37,6 @@ namespace OpenPass.IdController
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-<<<<<<< HEAD
-            services.AddConfigurationHelper();
-
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
             // Add Configuration Manager
             services.AddConfigurationManager();
 
@@ -67,13 +66,23 @@ namespace OpenPass.IdController
 
             services.AddIdentifierHelper();
 
-<<<<<<< HEAD
-            services.AddUserPreferencesRepository();
+            // Get the SWAN connection configuration and OWID configuration.
+            var owidConfig = Configuration.GetSection(
+                    "OwidConfiguration").Get<OwidConfiguration>();
+            services.AddSingleton(owidConfig);
+            services.AddSingleton<ISwanConnection>(
+                new SwanConnection(Configuration.GetSection(
+                    "SwanConfiguration").Get<SwanConfiguration>(), owidConfig));            
 
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
-            // Configure MVC
-            services.AddMvc().AddMetrics();
+            // Configure MVC, controllers and metrics.
+            services.AddMvc()
+                .AddApplicationPart(Assembly.Load(new AssemblyName(
+                    "Swan.Client.Controllers")))
+                .AddApplicationPart(Assembly.Load(new AssemblyName(
+                    "Owid.Client.Controllers")))
+                .SetCompatibilityVersion(CompatibilityVersion.Latest);
+            services.AddControllers();
+            services.AddMetrics();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(x =>
@@ -108,11 +117,12 @@ namespace OpenPass.IdController
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
+            // Enable routing and controller end points.
+            app.UseRouting();
+            app.UseEndpoints((config) =>
             {
-                // generic (non controller-specific) routes are defined here
+                config.MapControllers();
             });
-            loggerFactory.AddDebug();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();

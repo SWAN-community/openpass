@@ -1,8 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
-<<<<<<< HEAD
-using OpenPass.IdController.DataAccess;
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
+using Microsoft.Extensions.Logging;
+using OpenPass.IdController.Email;
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Helpers.Adapters;
 using OpenPass.IdController.Helpers.Configuration;
@@ -11,15 +9,6 @@ namespace OpenPass.IdController
 {
     public static class ServiceCollectionExtensions
     {
-<<<<<<< HEAD
-        public static IServiceCollection AddConfigurationHelper(this IServiceCollection services)
-        {
-            services.AddSingleton<IConfigurationHelper, ConfigurationHelper>();
-            return services;
-        }
-
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
         public static IServiceCollection AddConfigurationManager(this IServiceCollection services)
         {
             services.AddSingleton<IConfigurationManager, ConfigurationManager>();
@@ -34,6 +23,22 @@ namespace OpenPass.IdController
 
         public static IServiceCollection AddEmailHelper(this IServiceCollection services)
         {
+            services.AddSingleton<IEmailProvider>((s) =>
+            {
+                // Creates a new email provider based on the MailKit open
+                // source project. This is considered more robust and flexible 
+                // than the SmtpClient provided by Microsoft.
+                // See https://dotnetcoretutorials.com/2017/11/02/using-mailkit-send-receive-email-asp-net-core/
+                var config = s.GetRequiredService<IConfigurationManager>();
+                return new MailKitProvider(
+                    config.SmtpSettings.Host,
+                    config.SmtpSettings.Port,
+                    config.SmtpSettings.UserName,
+                    config.SmtpSettings.Password,
+                    MailKit.Security.SecureSocketOptions.SslOnConnect,
+                    s.GetRequiredService<ILoggerFactory>()
+                        .CreateLogger<MailKitProvider>());
+            });
             services.AddSingleton<IEmailHelper, EmailHelper>();
 
             return services;
@@ -73,14 +78,5 @@ namespace OpenPass.IdController
 
             return services;
         }
-<<<<<<< HEAD
-
-        public static IServiceCollection AddUserPreferencesRepository(this IServiceCollection services)
-        {
-            services.AddSingleton<IUserPreferencesRepository>(p => new StaticUserPreferencesRepository());
-            return services;
-        }
-=======
->>>>>>> 6c306a3f96610e772cab2728cdd0874f645fbd4f
     }
 }

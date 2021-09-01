@@ -7,6 +7,7 @@ using OpenPass.IdController.Helpers;
 namespace OpenPass.IdController.Controllers
 {
     [Route("open-pass")]
+    [ApiController]
     public class OpenPassController : Controller
     {
         private static readonly string _metricPrefix = "open-pass";
@@ -15,10 +16,10 @@ namespace OpenPass.IdController.Controllers
         private static readonly string _distIndexHtmlPath = "dist/index.html";
         private static readonly string _mediaTypeHeaderValue = "text/html";
 
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IWebHostEnvironment _hostingEnvironment;
         private readonly IMetricHelper _metricHelper;
 
-        public OpenPassController(IHostingEnvironment hostingEnvironment, IMetricHelper metricHelper)
+        public OpenPassController(IWebHostEnvironment hostingEnvironment, IMetricHelper metricHelper)
         {
             _hostingEnvironment = hostingEnvironment;
             _metricHelper = metricHelper;

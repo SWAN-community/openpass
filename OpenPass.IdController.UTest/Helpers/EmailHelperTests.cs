@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using NUnit.Framework;
+using OpenPass.IdController.Email;
 using OpenPass.IdController.Helpers;
 using OpenPass.IdController.Helpers.Configuration;
 using OpenPass.IdController.Models.Configuration;
@@ -32,6 +33,7 @@ namespace OpenPass.IdController.UTest.Helpers
                 Mock.Of<IMetricHelper>(),
                 Mock.Of<IViewRenderHelper>(),
                 _configurationManager.Object,
+                Mock.Of<IEmailProvider>(),
                 Mock.Of<ILogger<EmailHelper>>());
         }
 
