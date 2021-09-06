@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\OpenPass.IdController\OpenPass.IdController.csproj" />
+    <ProjectReference Include="..\Swan\Swan.Client.Test\Swan.Client.Test.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
