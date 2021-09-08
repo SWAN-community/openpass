@@ -70,18 +70,14 @@ namespace OpenPass.IdController.UTest.Helpers.Adapters
         [SetUp]
         public void SetUp()
         {
-            using (var rsa = new RSACryptoServiceProvider(512))
+            using (var crypto = ECDsa.Create(ECCurve.NamedCurves.nistP256))
             {
-                //
-                var parameters = rsa.ExportParameters(true);
-                var pubKeyBytes = rsa.ExportSubjectPublicKeyInfo();
-                var privKeyBytes = rsa.ExportPkcs8PrivateKey();
-                var publicPEM = new String(PemEncoding.Write(
-                    "PUBLIC KEY", 
-                    pubKeyBytes));
-                var privatePEM = new String(PemEncoding.Write(
-                    "PRIVATE KEY",
-                    privKeyBytes));
+                var parameters = crypto.ExportParameters(true);
+                var pubKeyBytes = crypto.ExportSubjectPublicKeyInfo();
+                var privKeyBytes = crypto.ExportPkcs8PrivateKey();
+                var publicPEM = new String(PemEncoding.Write("PUBLIC KEY", pubKeyBytes));
+                var privatePEM = new String(PemEncoding.Write("PRIVATE KEY", privKeyBytes));
+
                 var owidConfig = new OwidConfiguration()
                 {
                     Domain = "localhost",
@@ -173,7 +169,7 @@ namespace OpenPass.IdController.UTest.Helpers.Adapters
             // Provider. Verify it was created by this test.
             var prefOwid = new Owid.Client.Model.Owid(
                 data.Single(i => "pref".Equals(i.Key)).Value);
-            Assert.IsTrue(await prefOwid.VerifyAsync(_owidCreator.RSA));
+            Assert.IsTrue(await prefOwid.VerifyAsync(_owidCreator.Crypto));
             Assert.AreEqual(_owidCreator.Domain, prefOwid.Domain);
 
             // Verify that the raw "val" pair is present to indicate when the

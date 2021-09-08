@@ -29,11 +29,11 @@ namespace OpenPass.IdController.UTest.Helpers
             _metricHelperMock.Setup(mh => mh.SendCounterMetric(It.IsAny<string>()));
             _cookieHelperMock = new Mock<ICookieHelper>();
             _uid2AdapterMock = new Mock<IIdentifierAdapter>();
-            using (var rsa = new RSACryptoServiceProvider(512))
+            using (var crypto = ECDsa.Create(ECCurve.NamedCurves.nistP256))
             {
-                var parameters = rsa.ExportParameters(true);
-                var pubKeyBytes = rsa.ExportSubjectPublicKeyInfo();
-                var privKeyBytes = rsa.ExportPkcs8PrivateKey();
+                var parameters = crypto.ExportParameters(true);
+                var pubKeyBytes = crypto.ExportSubjectPublicKeyInfo();
+                var privKeyBytes = crypto.ExportPkcs8PrivateKey();
                 var publicPEM = new String(PemEncoding.Write("PUBLIC KEY", pubKeyBytes));
                 var privatePEM = new String(PemEncoding.Write("PRIVATE KEY", privKeyBytes));
                 _swanConnection = new SwanConnection(
